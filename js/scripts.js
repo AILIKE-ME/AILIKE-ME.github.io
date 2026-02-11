@@ -13,15 +13,15 @@ window.addEventListener('DOMContentLoaded', event => {
         <div class="modal fade" id="liquidationNoticeModal" tabindex="-1" aria-labelledby="liquidationNoticeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl modal-dialog-centered">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h2 class="modal-title fs-4" id="liquidationNoticeModalLabel">해 산 및 채 권 신 고 공 고(1차)</h2>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-header position-relative justify-content-center">
+                        <h2 class="modal-title fs-4 text-center w-100" id="liquidationNoticeModalLabel">해산 및 채권 신고 공고(1차)</h2>
+                        <button type="button" class="btn-close position-absolute end-0 me-3" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body" style="font-size: 1.1rem; line-height: 1.8;">
                         <p style="margin-bottom: 1.5rem;">
                             본 회사는 2026 년 1 월 10 일 임시주주총회에서 해산결의되었으므로 본 회사에 대하여 채권이 있는 분은 공고일 익일부터 2개월 이내에 그 채권액을 본 회사에 신고하여 주시기 바라며, 만일 위 기일내에 신고가 없으면 청산에서 제외됩니다.
                         </p>
-                        <p style="margin-bottom: 0; text-align: right; white-space: pre-line;">2026 년 2 월 12 일
+                        <p style="margin-bottom: 0; text-align: center; white-space: pre-line;">2026 년 2 월 12 일
 
 주식회사 에이아이라이크미
 인천광역시 미추홀구 아암대로 109, 3층 304호,305호-40(용현동)
