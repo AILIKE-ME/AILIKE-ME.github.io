@@ -11,13 +11,13 @@ window.addEventListener('DOMContentLoaded', event => {
 
     const noticeModalHtml = `
         <div class="modal fade" id="liquidationNoticeModal" tabindex="-1" aria-labelledby="liquidationNoticeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered" style="max-width: 560px; width: calc(100vw - 24px);">
                 <div class="modal-content">
                     <div class="modal-header position-relative justify-content-center" style="cursor: move; user-select: none;">
-                        <h2 class="modal-title fs-4 text-center w-100" id="liquidationNoticeModalLabel">해산 및 채권 신고 공고(1차)</h2>
+                        <h2 class="modal-title text-center w-100" id="liquidationNoticeModalLabel" style="font-size: 1.2rem;">해산 및 채권 신고 공고(1차)</h2>
                         <button type="button" class="btn-close position-absolute end-0 me-3" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body" style="font-size: 1.1rem; line-height: 1.8;">
+                    <div class="modal-body" style="font-size: 0.98rem; line-height: 1.65;">
                         <p style="margin-bottom: 1.5rem;">
                             본 회사는 2026 년 1 월 10 일 임시주주총회에서 해산결의되었으므로 본 회사에 대하여 채권이 있는 분은 공고일 익일부터 2개월 이내에 그 채권액을 본 회사에 신고하여 주시기 바라며, 만일 위 기일내에 신고가 없으면 청산에서 제외됩니다.
                         </p>
@@ -75,10 +75,12 @@ window.addEventListener('DOMContentLoaded', event => {
                 }
 
                 const dialogRect = noticeModalDialog.getBoundingClientRect();
-                const maxLeft = Math.max(window.innerWidth - dialogRect.width, 12);
-                const maxTop = Math.max(window.innerHeight - dialogRect.height, 12);
-                const nextLeft = Math.min(Math.max(dragMoveEvent.clientX - dragOffsetX, 12), maxLeft);
-                const nextTop = Math.min(Math.max(dragMoveEvent.clientY - dragOffsetY, 12), maxTop);
+                const minLeft = -dialogRect.width + 72;
+                const maxLeft = window.innerWidth - 72;
+                const minTop = -dialogRect.height + 72;
+                const maxTop = window.innerHeight - 72;
+                const nextLeft = Math.min(Math.max(dragMoveEvent.clientX - dragOffsetX, minLeft), maxLeft);
+                const nextTop = Math.min(Math.max(dragMoveEvent.clientY - dragOffsetY, minTop), maxTop);
                 noticeModalDialog.style.left = `${nextLeft}px`;
                 noticeModalDialog.style.top = `${nextTop}px`;
             });
