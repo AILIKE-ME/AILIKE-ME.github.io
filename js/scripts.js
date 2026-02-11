@@ -13,7 +13,7 @@ window.addEventListener('DOMContentLoaded', event => {
         <div class="modal fade" id="liquidationNoticeModal" tabindex="-1" aria-labelledby="liquidationNoticeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl modal-dialog-centered">
                 <div class="modal-content">
-                    <div class="modal-header position-relative justify-content-center">
+                    <div class="modal-header position-relative justify-content-center" style="cursor: move; user-select: none;">
                         <h2 class="modal-title fs-4 text-center w-100" id="liquidationNoticeModalLabel">해산 및 채권 신고 공고(1차)</h2>
                         <button type="button" class="btn-close position-absolute end-0 me-3" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -35,6 +35,61 @@ window.addEventListener('DOMContentLoaded', event => {
     document.body.insertAdjacentHTML('beforeend', noticeModalHtml);
     const noticeModalElement = document.getElementById('liquidationNoticeModal');
     if (noticeModalElement) {
+        const noticeModalDialog = noticeModalElement.querySelector('.modal-dialog');
+        const noticeModalHeader = noticeModalElement.querySelector('.modal-header');
+
+        const centerNoticeDialog = () => {
+            if (!noticeModalDialog) {
+                return;
+            }
+
+            noticeModalDialog.style.margin = '0';
+            noticeModalDialog.style.position = 'fixed';
+            const dialogRect = noticeModalDialog.getBoundingClientRect();
+            const left = Math.max((window.innerWidth - dialogRect.width) / 2, 12);
+            const top = Math.max((window.innerHeight - dialogRect.height) / 2, 12);
+            noticeModalDialog.style.left = `${left}px`;
+            noticeModalDialog.style.top = `${top}px`;
+        };
+
+        if (noticeModalDialog && noticeModalHeader) {
+            let isDragging = false;
+            let dragOffsetX = 0;
+            let dragOffsetY = 0;
+
+            noticeModalHeader.addEventListener('mousedown', dragStartEvent => {
+                if (dragStartEvent.button !== 0 || dragStartEvent.target.closest('.btn-close')) {
+                    return;
+                }
+
+                const dialogRect = noticeModalDialog.getBoundingClientRect();
+                isDragging = true;
+                dragOffsetX = dragStartEvent.clientX - dialogRect.left;
+                dragOffsetY = dragStartEvent.clientY - dialogRect.top;
+                dragStartEvent.preventDefault();
+            });
+
+            document.addEventListener('mousemove', dragMoveEvent => {
+                if (!isDragging) {
+                    return;
+                }
+
+                const dialogRect = noticeModalDialog.getBoundingClientRect();
+                const maxLeft = Math.max(window.innerWidth - dialogRect.width, 12);
+                const maxTop = Math.max(window.innerHeight - dialogRect.height, 12);
+                const nextLeft = Math.min(Math.max(dragMoveEvent.clientX - dragOffsetX, 12), maxLeft);
+                const nextTop = Math.min(Math.max(dragMoveEvent.clientY - dragOffsetY, 12), maxTop);
+                noticeModalDialog.style.left = `${nextLeft}px`;
+                noticeModalDialog.style.top = `${nextTop}px`;
+            });
+
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+
+            noticeModalElement.addEventListener('shown.bs.modal', centerNoticeDialog, { once: true });
+        }
+
         const noticeModal = new bootstrap.Modal(noticeModalElement);
         noticeModal.show();
     }
