@@ -14,7 +14,7 @@ window.addEventListener('DOMContentLoaded', event => {
             <div class="modal-dialog modal-dialog-centered" style="max-width: 560px; width: calc(100vw - 24px);">
                 <div class="modal-content">
                     <div class="modal-header position-relative justify-content-center" style="cursor: move; user-select: none;">
-                        <h2 class="modal-title text-center w-100" id="liquidationNoticeModalLabel" style="font-size: 1.2rem;">해산 및 채권 신고 공고(1차)</h2>
+                        <h2 class="modal-title text-center w-100" id="liquidationNoticeModalLabel" style="font-size: 1.2rem;">해 산 및 채 권 신 고 공 고(1차)</h2>
                         <button type="button" class="btn-close position-absolute end-0 me-3" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body" style="font-size: 0.98rem; line-height: 1.65;">
