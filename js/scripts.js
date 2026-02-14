@@ -51,6 +51,8 @@ window.addEventListener('DOMContentLoaded', event => {
         </div>
     `;
 
+    let noticeModalTopZIndex = 1055;
+
     const initializeNoticeModal = (noticeModalElement, modalIndex) => {
         const noticeModalDialog = noticeModalElement.querySelector('.modal-dialog');
         const noticeModalHeader = noticeModalElement.querySelector('.modal-header');
@@ -63,9 +65,13 @@ window.addEventListener('DOMContentLoaded', event => {
             noticeModalDialog.style.margin = '0';
             noticeModalDialog.style.position = 'fixed';
             const dialogRect = noticeModalDialog.getBoundingClientRect();
-            const offset = modalIndex * 40;
-            const left = Math.max((window.innerWidth - dialogRect.width) / 2 + offset, 12);
-            const top = Math.max((window.innerHeight - dialogRect.height) / 2 + offset, 12);
+            const initialOffsets = [
+                { x: -160, y: -70 },
+                { x: 160, y: 70 },
+            ];
+            const { x, y } = initialOffsets[modalIndex] || { x: modalIndex * 40, y: modalIndex * 40 };
+            const left = Math.min(Math.max((window.innerWidth - dialogRect.width) / 2 + x, 12), window.innerWidth - 84);
+            const top = Math.min(Math.max((window.innerHeight - dialogRect.height) / 2 + y, 12), window.innerHeight - 84);
             noticeModalDialog.style.left = `${left}px`;
             noticeModalDialog.style.top = `${top}px`;
         };
@@ -80,6 +86,7 @@ window.addEventListener('DOMContentLoaded', event => {
                     return;
                 }
 
+                noticeModalElement.style.zIndex = `${++noticeModalTopZIndex}`;
                 const dialogRect = noticeModalDialog.getBoundingClientRect();
                 isDragging = true;
                 dragOffsetX = dragStartEvent.clientX - dialogRect.left;
@@ -123,7 +130,8 @@ window.addEventListener('DOMContentLoaded', event => {
     const noticeModals = noticeModalElements.map((noticeModalElement, index) => initializeNoticeModal(noticeModalElement, index));
 
     if (noticeModals.length > 0) {
-        noticeModals.forEach(noticeModal => {
+        noticeModals.forEach((noticeModal, index) => {
+            noticeModalElements[index].style.zIndex = `${1055 + index}`;
             noticeModal.show();
         });
     }
