@@ -57,6 +57,11 @@ window.addEventListener('DOMContentLoaded', event => {
         const noticeModalDialog = noticeModalElement.querySelector('.modal-dialog');
         const noticeModalHeader = noticeModalElement.querySelector('.modal-header');
 
+        noticeModalElement.style.pointerEvents = 'none';
+        if (noticeModalDialog) {
+            noticeModalDialog.style.pointerEvents = 'auto';
+        }
+
         const centerNoticeDialog = () => {
             if (!noticeModalDialog) {
                 return;
